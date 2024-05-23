@@ -23,22 +23,27 @@ public class Animal : MonoBehaviour
    // Variables for appearance
    public Sprite hatSprite;
    public Sprite mustacheSprite;
-   private GameObject hatObject;
-   private GameObject mustacheObject;
+   protected GameObject hatObject;
+   protected GameObject mustacheObject;
    protected SpriteRenderer hatRenderer;
    protected SpriteRenderer mustacheRenderer;
+   protected SpriteRenderer spriteRenderer; // Varible for the sprite renderer
 
-   // Variables for scaling and positioning (sprites)
+   // Variables for sca ling and positioning (sprites)
    public Vector3 hatScale = new Vector3(1, 1, 1);
    public Vector3 mustacheScale = new Vector3(1, 1, 1);
    public Vector3 hatPosition = new Vector3(0, 0.5f, 0);
    public Vector3 mustachePosition = new Vector3(0, -0.5f, 0);
 
-
-
-
    protected virtual void Awake()
    {
+      // Get the SpriteRenderer component attached to the GameObject
+      spriteRenderer = GetComponent<SpriteRenderer>();
+      if (spriteRenderer == null)
+      {
+        Debug.LogError("SpriteRenderer component is missing from the GameObject");
+      }
+   
     // Add an AudioSource component to the object
     // audioSource = gameObject.AddComponent<AudioSource>();
 
@@ -68,6 +73,28 @@ public class Animal : MonoBehaviour
     hatObject.transform.localPosition = hatPosition;
     mustacheObject.transform.localPosition = mustachePosition;
 
+    // Add a BoxCollider2D to the hat object and adjust its size to match the hat sprite
+    BoxCollider2D hatCollider = hatObject.AddComponent<BoxCollider2D>();
+    if (hatRenderer.sprite != null)
+    {
+        hatCollider.size = hatRenderer.sprite.bounds.size;
+    }
+    else
+    {
+        Debug.LogWarning("Hat sprite is null. Collider size cannot be set.");
+    }
+
+     // Add a BoxCollider2D to the mustache object and adjust its size to match the mustache sprite
+        BoxCollider2D mustacheCollider = mustacheObject.AddComponent<BoxCollider2D>();
+        if (mustacheRenderer.sprite != null)
+        {
+            mustacheCollider.size = mustacheRenderer.sprite.bounds.size;
+        }
+        else
+        {
+            Debug.LogWarning("Mustache sprite is null. Collider size cannot be set.");
+        }
+
    }
 
    protected virtual void OnMouseDown()
@@ -77,11 +104,23 @@ public class Animal : MonoBehaviour
     isDragging = true;
     PlayAnimalSound();
     Debug.Log("Mouse down on " + gameObject.name);
+    
    }
 
     protected virtual void OnMouseUp()
     {
-     isDragging = false;
+     isDragging = false;  
+    }
+       // Add this method to handle mouse down specifically for the hat
+    protected virtual void OnHatMouseDown()
+    {
+        // Override this method in subclasses to handle hat tap
+    }
+
+    // Add this method to handle mouse down specifically for the mustache
+    protected virtual void OnMustacheMouseDown()
+    {
+        // Override this method in subclasses to handle mustache tap
     }
 
     protected virtual void Update()
@@ -207,4 +246,17 @@ public class Animal : MonoBehaviour
     {
      mustacheObject.transform.localPosition = newPosition;
     }
+
+    public void ChangeColor(Color newColor)
+    {
+     if (spriteRenderer != null)
+     {
+      spriteRenderer.color = newColor;
+     }
+     else
+       {
+         Debug.LogError("SpriteRenderer is not found");
+       }
+    }
+
 }

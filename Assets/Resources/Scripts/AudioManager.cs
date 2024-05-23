@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class AudioManager : MonoBehaviour
 {
      public static AudioManager Instance { get; private set; }
 
     public AudioClip themeMusic;
+    public AudioClip designSceneMusic;
     public AudioClip[] meowSounds;
     public AudioClip tumbleweedSound;
 
@@ -20,6 +23,8 @@ public class AudioManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             audioSource = gameObject.AddComponent<AudioSource>();
+            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the scene loaded event
+
         }
         else
         {
@@ -39,6 +44,13 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
     }
 
+    public void PlayDesignSceneMusic()
+    {
+        audioSource.loop = true;
+        audioSource.clip = designSceneMusic;
+        audioSource.Play();
+    }
+
     public void PlayMeowSound(int index)
     {
         if (index >= 0 && index < meowSounds.Length)
@@ -54,5 +66,25 @@ public class AudioManager : MonoBehaviour
     public void PlayTumbleweedSound()
     {
         audioSource.PlayOneShot(tumbleweedSound);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "DesignScene")
+        {
+            PlayDesignSceneMusic();
+        }
+        else
+        {
+            PlayThemeMusic();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded; // Unsubscribe from the event when the object is destroyed
+        }
     }
 }
