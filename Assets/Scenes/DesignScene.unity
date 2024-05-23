@@ -174,7 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f21ef8b094a514ea162d9f736ff1a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Tumbleweed
 --- !u!114 &107552531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +218,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1401755122}
+      - m_Target: {fileID: 1401755124}
         m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
         m_MethodName: LoadSceneByName
         m_Mode: 5
@@ -496,7 +495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f21ef8b094a514ea162d9f736ff1a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
 --- !u!114 &1229856918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,7 +539,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1401755122}
+      - m_Target: {fileID: 1401755124}
         m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
         m_MethodName: LoadSceneByName
         m_Mode: 5
@@ -600,7 +598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1401755123}
-  - component: {fileID: 1401755122}
+  - component: {fileID: 1401755124}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -608,18 +606,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1401755122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401755121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cdcb4a00c7685a4e941fde4d49cce23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1401755123
 Transform:
   m_ObjectHideFlags: 0
@@ -635,6 +621,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1401755124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401755121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cdcb4a00c7685a4e941fde4d49cce23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1726415600
 GameObject:
   m_ObjectHideFlags: 0
