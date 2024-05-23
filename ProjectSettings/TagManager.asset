@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Border
+  - Paintable
   layers:
   - Default
   - TransparentFX
@@ -39,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Above UI
+    uniqueID: 4094937387
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

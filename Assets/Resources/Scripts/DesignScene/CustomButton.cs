@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Button : MonoBehaviour
+public class CustomButton : MonoBehaviour
 {
     [System.Serializable]
     public class Cat
@@ -15,14 +16,18 @@ public class Button : MonoBehaviour
     public Cat musling;
     public Cat misling;
 
-    public Button puslingButton;
-    public Button muslingButton;
-    public Button mislingButton;
+    public UnityEngine.UI.Button puslingButton;
+    public UnityEngine.UI.Button muslingButton;
+    public UnityEngine.UI.Button mislingButton;
+
+    public GameObject wantedObject;
 
     void Start()
     {
-        // Deactivate all cats and their clothes at the start
+        // Deactivate all cats and their clothes at the start (and wanted object)
+        wantedObject.SetActive(false);
         DeactivateAllCats();
+        
     }
 
     void DeactivateAllCats()
@@ -80,6 +85,12 @@ public class Button : MonoBehaviour
     {
         ActivateCat(misling);
     }
+    public void ActivateWantedObject()
+
+    {
+        wantedObject.SetActive(true);
+    }
+
 }
 
 
