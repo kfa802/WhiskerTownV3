@@ -16,23 +16,27 @@ public class tumble : MonoBehaviour
     [SerializeField] float tiltThreshold = 5f;
     
 
-
+   // Called when the script instance is being loaded
    void Awake()
     {
+        //Gets rigidbody and animator componant
         rb = GetComponent<Rigidbody2D> ();
         myAnimator = gameObject.GetComponent<Animator>();
+        //call coroutine to destroy gameobject after delay
         StartCoroutine(DestroyAfterTime());
     }
 
     void Update()
     {
-        //moves gameobject by tilting device
+        //Moves gameobject by tilting device
         if (Mathf.Abs(Input.acceleration.x) > tiltThreshold)
         {
+            //Calculates movement based on tilt
             xMovement = Input.acceleration.x * moveSpeed;
+            //Prevents movement outside the defined position
             transform.position = new Vector2 (Mathf.Clamp (transform.position.x, -20f, 20f), transform.position.y);
         }
-
+        //Moves gameobject with constant velocity
         else 
         {
            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime); 
@@ -41,9 +45,11 @@ public class tumble : MonoBehaviour
 
     void FixedUpdate()
     {
+        //Sets velocity of rigidbody
         rb.velocity = new Vector2 (xMovement, 0f);
     }
 
+    //Coroutine to destroy gameobject after delay
     IEnumerator DestroyAfterTime()
     {
         yield return new WaitForSeconds(delay2);
@@ -52,19 +58,17 @@ public class tumble : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //Play tumbleweed sound through audio manager
         AudioManager.Instance.PlayTumbleweedSound();
-        //Initiate the Explode(); Method
+        //Initiate the Explode() Method
         Explode();
     }
 
-    //Explode method
     void Explode()
     {
-        //Set the animator to PopTrigger animation
+        //Set the animator to Trigger animation
         myAnimator.SetTrigger("Active");
         //Destroys the gameObject after delay
         Destroy(gameObject,delay1);
     }
-    
-    
 }
