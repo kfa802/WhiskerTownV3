@@ -7,7 +7,6 @@ public class spawn : MonoBehaviour
    public int numberToSpawn; // Controls how many objects to spawn
     public List<GameObject> spawnPool; // List with prefabs that can spawn
     public GameObject quad; // GameObject where the prefabs should spawn
-
     public float frequency; // How often should they spawn
     float lastSpawnedTime; // Time which keeps track of last time spawned
 
