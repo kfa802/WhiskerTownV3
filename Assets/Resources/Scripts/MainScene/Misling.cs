@@ -6,10 +6,10 @@ public class Misling : Animal
 {
 
      // Variables for cycling through hat sprites
-    private int currentHatIndex = 0;
-    private int currentMustacheIndex = 0;
-    public Sprite[] hatSprites; // Assuming this array contains different hat sprites for Misling
-    public Sprite[] mustacheSprites; // Assuming this array contains different mustache sprites for Misling
+    //private int currentHatIndex = 0;
+    //private int currentMustacheIndex = 0;
+    //public Sprite[] hatSprites; // Array containing hat sprites for Misling
+    //public Sprite[] mustacheSprites; // Array containing mustache sprites for Misling
 
 
     protected override void Awake()
@@ -39,7 +39,7 @@ public class Misling : Animal
 
     protected override void PlayAnimalSound()
     {
-        AudioManager.Instance.PlayMeowSound(0); // Assumming 0 is the index for Misling's sound
+        AudioManager.Instance.PlayMeowSound(0); //  0 is the index for Misling's sound
     }
 
     private void Start()
@@ -54,21 +54,21 @@ public class Misling : Animal
         base.OnMouseDown();
 
         // Change color when tapped
-        ChangeColor(Random.ColorHSV()); // Change color to a random color
+        //ChangeColor(Random.ColorHSV()); // Change color to a random color
 
         // Check if the hat or mustache was clicked
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hit.collider != null)
-        {
-            if (hit.collider.gameObject == hatObject)
-            {
-                OnHatMouseDown();
-            }
-            else if (hit.collider.gameObject == mustacheObject)
-            {
-                OnMustacheMouseDown();
-            }
-        }
+        //RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+       // if (hit.collider != null)
+        //{
+           // if (hit.collider.gameObject == hatObject)
+           // {
+                //OnHatMouseDown();
+            //}
+           // else if (hit.collider.gameObject == mustacheObject)
+           // {
+               // OnMustacheMouseDown();
+           // }
+       // }
     }
 
     protected override void OnHatMouseDown()
@@ -89,28 +89,30 @@ public class Misling : Animal
         ChangeMustacheToNextSprite();
     }
 
+
     
     // Method to change the hat sprite to the next one
-    protected void ChangeHatToNextSprite()
-    {
-        if (hatSprites.Length > 0)
-        {
-            currentHatIndex = (currentHatIndex + 1) % hatSprites.Length;
-            ChangeHat(hatSprites[currentHatIndex]);
-        }
-    }
+    //protected void ChangeHatToNextSprite()
+   // {
+       // if (hatSprites.Length > 0)
+        //{
+            //currentHatIndex = (currentHatIndex + 1) % hatSprites.Length;
+            //ChangeHat(hatSprites[currentHatIndex]);
+        //}
+    //}
 
     // Method to change the mustache sprite to the next one
-    protected void ChangeMustacheToNextSprite()
-    {
-        if (mustacheSprites.Length > 0)
-        {
-            currentMustacheIndex = (currentMustacheIndex + 1) % mustacheSprites.Length;
-            ChangeMustache(mustacheSprites[currentMustacheIndex]);
-        }
-    }
+    //protected void ChangeMustacheToNextSprite()
+    //{
+        //if (mustacheSprites.Length > 0)
+       // {
+           // currentMustacheIndex = (currentMustacheIndex + 1) % mustacheSprites.Length;
+            //ChangeMustache(mustacheSprites[currentMustacheIndex]);
+       // }
+    //}
 
 
 }
+
 
 

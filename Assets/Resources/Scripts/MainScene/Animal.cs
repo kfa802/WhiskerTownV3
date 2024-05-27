@@ -10,16 +10,9 @@ public class Animal : MonoBehaviour
    // Variables for the click and drag method
    private bool isDragging = false;
    private Vector3 offset;
-
-   // Variables for the audio manager
-   // public AudioClip animalSound;
-   // private AudioSource audioSource;
-
    // Variables for movement
    private Coroutine walkCoroutine;
    protected float speed = 1f; // Default walking speed 
-
-
    // Variables for appearance
    public Sprite hatSprite;
    public Sprite mustacheSprite;
@@ -35,6 +28,22 @@ public class Animal : MonoBehaviour
    public Vector3 hatPosition = new Vector3(0, 0.5f, 0);
    public Vector3 mustachePosition = new Vector3(0, -0.5f, 0);
 
+
+      // Variables for sprite arrays
+    protected int currentHatIndex = 0;
+    protected int currentMustacheIndex = 0;
+    public Sprite[] hatSprites;
+    public Sprite[] mustacheSprites;
+
+
+
+
+
+   // Variables for the audio manager
+   // public AudioClip animalSound;
+   // private AudioSource audioSource;
+
+
    protected virtual void Awake()
    {
       // Get the SpriteRenderer component attached to the GameObject
@@ -43,9 +52,6 @@ public class Animal : MonoBehaviour
       {
         Debug.LogError("SpriteRenderer component is missing from the GameObject");
       }
-   
-    // Add an AudioSource component to the object
-    // audioSource = gameObject.AddComponent<AudioSource>();
 
     // Start the walking coroutine
     walkCoroutine = StartCoroutine(WalkAround());
@@ -72,6 +78,9 @@ public class Animal : MonoBehaviour
 
     hatObject.transform.localPosition = hatPosition;
     mustacheObject.transform.localPosition = mustachePosition;
+
+     // Add an AudioSource component to the object
+    // audioSource = gameObject.AddComponent<AudioSource>();
 
     // Add a BoxCollider2D to the hat object and adjust its size to match the hat sprite
     BoxCollider2D hatCollider = hatObject.AddComponent<BoxCollider2D>();
@@ -104,6 +113,23 @@ public class Animal : MonoBehaviour
     isDragging = true;
     PlayAnimalSound();
     Debug.Log("Mouse down on " + gameObject.name);
+
+    // Change color when tapped
+        ChangeColor(Random.ColorHSV()); // Change color to a random color
+
+        // Check if the hat or mustache was clicked
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        if (hit.collider != null)
+        {
+            if (hit.collider.gameObject == hatObject)
+            {
+                OnHatMouseDown();
+            }
+            else if (hit.collider.gameObject == mustacheObject)
+            {
+                OnMustacheMouseDown();
+            }
+        }
     
    }
 
@@ -257,6 +283,26 @@ public class Animal : MonoBehaviour
        {
          Debug.LogError("SpriteRenderer is not found");
        }
+    }
+
+    // Method to change the hat sprite to the next one
+    protected virtual void ChangeHatToNextSprite()
+    {
+        if (hatSprites.Length > 0)
+        {
+            currentHatIndex = (currentHatIndex + 1) % hatSprites.Length;
+            ChangeHat(hatSprites[currentHatIndex]);
+        }
+    }
+
+    // Method to change the mustache sprite to the next one
+    protected virtual void ChangeMustacheToNextSprite()
+    {
+        if (mustacheSprites.Length > 0)
+        {
+            currentMustacheIndex = (currentMustacheIndex + 1) % mustacheSprites.Length;
+            ChangeMustache(mustacheSprites[currentMustacheIndex]);
+        }
     }
 
 }

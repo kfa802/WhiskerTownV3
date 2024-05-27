@@ -5,17 +5,16 @@ using UnityEngine;
 public class Musling : Animal
 {
      // Variables for cycling through hat sprites
-    private int currentHatIndex = 0;
-    private int currentMustacheIndex = 0;
-    public Sprite[] hatSprites; // Assuming this array contains different hat sprites for Misling
-    public Sprite[] mustacheSprites; // Assuming this array contains different mustache sprites for Misling
+    //private int currentHatIndex = 0;
+    //private int currentMustacheIndex = 0;
+    //public Sprite[] hatSprites; // Assuming this array contains different hat sprites for Misling
+    //public Sprite[] mustacheSprites; // Assuming this array contains different mustache sprites for Misling
 
       protected override void Awake()
     {
         // Assign specific hat and mustache sprites for Musling
         hatSprite = Resources.Load<Sprite>("Sprites/Hat2");
         mustacheSprite = Resources.Load<Sprite>("Sprites/Mustache2");
-
 
         base.Awake();
         // Assign the specific sound for the dog
@@ -51,21 +50,21 @@ public class Musling : Animal
         base.OnMouseDown();
 
         // Change color when tapped
-        ChangeColor(Random.ColorHSV()); // Change color to a random color
+        //ChangeColor(Random.ColorHSV()); // Change color to a random color
 
          // Check if the hat or mustache was clicked
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hit.collider != null)
-        {
-            if (hit.collider.gameObject == hatObject)
-            {
-                OnHatMouseDown();
-            }
-            else if (hit.collider.gameObject == mustacheObject)
-            {
-                OnMustacheMouseDown();
-            }
-        }
+       // RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+       // if (hit.collider != null)
+       // {
+          //  if (hit.collider.gameObject == hatObject)
+           // {
+               // OnHatMouseDown();
+            //}
+           // else if (hit.collider.gameObject == mustacheObject)
+           // {
+           //     OnMustacheMouseDown();
+            //}
+       // }
     }
 
      protected override void OnHatMouseDown()
@@ -88,24 +87,24 @@ public class Musling : Animal
 
     
     // Method to change the hat sprite to the next one
-    protected void ChangeHatToNextSprite()
-    {
-        if (hatSprites.Length > 0)
-        {
-            currentHatIndex = (currentHatIndex + 1) % hatSprites.Length;
-            ChangeHat(hatSprites[currentHatIndex]);
-        }
-    }
+    //protected void ChangeHatToNextSprite()
+   // {
+        //if (hatSprites.Length > 0)
+        //{
+           // currentHatIndex = (currentHatIndex + 1) % hatSprites.Length;
+           // ChangeHat(hatSprites[currentHatIndex]);
+       // }
+   // }
 
     // Method to change the mustache sprite to the next one
-    protected void ChangeMustacheToNextSprite()
-    {
-        if (mustacheSprites.Length > 0)
-        {
-            currentMustacheIndex = (currentMustacheIndex + 1) % mustacheSprites.Length;
-            ChangeMustache(mustacheSprites[currentMustacheIndex]);
-        }
-    }
+    //protected void ChangeMustacheToNextSprite()
+    //{
+       // if (mustacheSprites.Length > 0)
+        //{
+          //  currentMustacheIndex = (currentMustacheIndex + 1) % mustacheSprites.Length;
+           // ChangeMustache(mustacheSprites[currentMustacheIndex]);
+        //}
+    //}
 
 
 }
