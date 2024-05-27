@@ -24,7 +24,7 @@ public class Pusling : Animal
         base.Awake();
 
         // Set specific speed for Pusling
-        speed = 0.5f;
+        //speed = 0.5f;
 
         // Set specific scale for Pusling's hat and mustache
         ChangeHatScale(new Vector3(0.5f, 0.5f, 0.5f)); // Adjust as needed
@@ -36,11 +36,6 @@ public class Pusling : Animal
 
         StartCoroutine(ToggleInvisibility());
     }
-
-   //protected override void Update()
-    //{
-       // base.Update();
-    //}
    
     protected override void PlayAnimalSound()
     {

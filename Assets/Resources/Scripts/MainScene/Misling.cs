@@ -5,7 +5,6 @@ using UnityEngine;
 public class Misling : Animal
 {
 
-
     private bool isHopping = false;
     private float hopHeight = 0.3f; // Adjust as needed
 
@@ -47,7 +46,7 @@ public class Misling : Animal
 
         if(!isDragging)
         {
-            if (!isHopping && Random.value < 0.00009f) // Adjust the probability as needed 
+            if (!isHopping && Random.value < 0.0009f) // Adjust the probability as needed 
             {
                 StartCoroutine(Hop());
             }
@@ -106,6 +105,10 @@ public class Misling : Animal
     {
         // Call the base method first to perform drag behaviour ´
         base.OnMouseDown();
+
+        // Unique behavior for Misling
+
+        
 
         // Change color when tapped
         //ChangeColor(Random.ColorHSV()); // Change color to a random color
