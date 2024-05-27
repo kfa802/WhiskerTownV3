@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This script has used chatgpt for fixing mistakes
 public class tumble : MonoBehaviour
 {
     Rigidbody2D rb;
