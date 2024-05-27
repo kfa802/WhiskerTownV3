@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Musling : Animal
 {
+
+      // Variables for speed variation
+    public float minSpeed = 1f;
+    public float maxSpeed = 5f;
+    private bool isSpeedIncreasing = false;
+
      // Variables for cycling through hat sprites
     //private int currentHatIndex = 0;
     //private int currentMustacheIndex = 0;
@@ -22,7 +28,7 @@ public class Musling : Animal
         // Debug.Log("Musling sound loaded " + (animalSound != null));
 
         // Set specific speed for Musling
-        speed = 1f;
+        speed = Random.Range(minSpeed, maxSpeed); // Set initial speed randomly 
 
         // Set specific scale for Musling's hat and mustache
         ChangeHatScale(new Vector3(0.55f, 0.55f, 0.55f)); // Adjust as needed
@@ -32,6 +38,30 @@ public class Musling : Animal
         ChangeHatPosition(new Vector3(-2.6f, 5f, -1)); // Adjust as needed
         ChangeMustachePosition(new Vector3(-2.7f, 0.3f, -1)); // Adjust as needed
     }
+
+    private void MuslingUpdate()
+    {
+        base.Update();
+        // Check if speed should be increased
+        if (!isSpeedIncreasing && Random.Range(0f, 1f) < 0.05f) // Adjust the probability as needed
+        {
+            isSpeedIncreasing = true;
+            IncreaseSpeedRandomly();
+        }
+    }
+
+    private void IncreaseSpeedRandomly()
+    {
+        // Increase speed randomly within the defined range
+        speed = Random.Range(minSpeed * 2, maxSpeed * 10); // Adjust the range as needed
+        Invoke("ResetSpeedIncrease", Random.Range(1f, 5f)); // Reset speed increase after random duration
+    }
+
+    private void ResetSpeedIncrease()
+    {
+        isSpeedIncreasing = false;
+    }
+
 
     protected override void PlayAnimalSound()
     {

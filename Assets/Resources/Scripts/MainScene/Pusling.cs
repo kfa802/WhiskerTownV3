@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Pusling : Animal
 {
+
+    private bool isInvisible = false;
+    private float invisibilityDuration = 2f; // Duration of invisibility in seconds
+    private float invisibilityCooldown = 5f; // Cooldown between invisibility toggles
+
     // Variables for cycling through hat sprites
     //private int currentHatIndex = 0;
     //private int currentMustacheIndex = 0;
@@ -28,12 +33,43 @@ public class Pusling : Animal
         // Set specific position for Pusling's hat and mustache
         ChangeHatPosition(new Vector3(-4.5f, 5f, -1)); // Adjust as needed
         ChangeMustachePosition(new Vector3(-4.8f, 0.5f, -1)); // Adjust as needed
+
+        StartCoroutine(ToggleInvisibility());
     }
 
+   protected override void Update()
+    {
+        base.Update();
+
+    }
+   
     protected override void PlayAnimalSound()
     {
         AudioManager.Instance.PlayMeowSound(2); // Assumming 2 is the index for Pusling's sound
     }
+
+    private IEnumerator ToggleInvisibility()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(invisibilityCooldown);
+
+            // Toggle invisibility
+            isInvisible = !isInvisible;
+
+            // Set visibility based on the toggle state
+            spriteRenderer.enabled = !isInvisible;
+
+            // Wait for the duration of invisibility
+            yield return new WaitForSeconds(invisibilityDuration);
+            
+            // Toggle back visibility
+            spriteRenderer.enabled = true;
+        }
+    }
+
+
+
 
     private void Start()
     {

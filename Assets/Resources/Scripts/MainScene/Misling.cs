@@ -5,12 +5,16 @@ using UnityEngine;
 public class Misling : Animal
 {
 
-     // Variables for cycling through hat sprites
+
+    private bool isHopping = false;
+    private float hopHeight = 0.3f; // Adjust as needed
+
+
+    // Variables for cycling through hat sprites
     //private int currentHatIndex = 0;
     //private int currentMustacheIndex = 0;
     //public Sprite[] hatSprites; // Array containing hat sprites for Misling
     //public Sprite[] mustacheSprites; // Array containing mustache sprites for Misling
-
 
     protected override void Awake()
     {
@@ -35,6 +39,56 @@ public class Misling : Animal
          // Assign the specific sound for Misling
         // animalSound = Resources.Load<AudioClip>("Sounds/Meow1");
         // Debug.Log("Misling sound loaded " + (animalSound != null));
+    }
+
+    protected override void Update()
+    {
+        base.Update(); // Call base.Update()
+
+        if(!isDragging)
+        {
+            if (!isHopping && Random.value < 0.00009f) // Adjust the probability as needed 
+            {
+                StartCoroutine(Hop());
+            }
+
+        }
+    }
+
+    private IEnumerator Hop()
+    {
+        isHopping = true;
+
+        Vector3 startPos = transform.position;
+         Vector3 endPos = startPos + new Vector3(0, hopHeight, 0); // Adjust the hop height as needed
+        float duration = 0.2f; // Adjust the duration of the hop as needed
+        float elapsed = 0f;
+
+         while (elapsed < duration)
+        {
+            transform.position = Vector3.Lerp(startPos, endPos, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPos;
+
+        yield return new WaitForSeconds(0.1f); // Adjust the time between hops as needed
+
+        startPos = transform.position;
+        endPos = startPos - new Vector3(0, hopHeight, 0); // Move back down
+        elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            transform.position = Vector3.Lerp(startPos, endPos, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPos;
+
+        isHopping = false;
     }
 
     protected override void PlayAnimalSound()

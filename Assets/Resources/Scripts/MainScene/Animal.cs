@@ -8,7 +8,7 @@ public class Animal : MonoBehaviour
    // Define properties and methods common to all animals
    
    // Variables for the click and drag method
-   private bool isDragging = false;
+   protected bool isDragging = false;
    private Vector3 offset;
    // Variables for movement
    private Coroutine walkCoroutine;
