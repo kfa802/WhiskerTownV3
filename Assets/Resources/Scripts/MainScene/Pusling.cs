@@ -37,11 +37,10 @@ public class Pusling : Animal
         StartCoroutine(ToggleInvisibility());
     }
 
-   protected override void Update()
-    {
-        base.Update();
-
-    }
+   //protected override void Update()
+    //{
+       // base.Update();
+    //}
    
     protected override void PlayAnimalSound()
     {
@@ -67,8 +66,6 @@ public class Pusling : Animal
             spriteRenderer.enabled = true;
         }
     }
-
-
 
 
     private void Start()

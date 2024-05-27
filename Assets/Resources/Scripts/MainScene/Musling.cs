@@ -39,7 +39,7 @@ public class Musling : Animal
         ChangeMustachePosition(new Vector3(-2.7f, 0.3f, -1)); // Adjust as needed
     }
 
-    private void MuslingUpdate()
+    protected override void Update()
     {
         base.Update();
         // Check if speed should be increased
